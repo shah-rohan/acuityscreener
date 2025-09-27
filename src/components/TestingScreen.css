@@ -1,19 +1,13 @@
 .testing-screen {
   background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
-  margin: 0 auto;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 .testing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .testing-header h2 {
@@ -22,52 +16,6 @@
   font-weight: 600;
 }
 
-.test-controls {
-  display: flex;
-  gap: 1rem;
-}
-
-.reset-button, .recalibrate-button {
-  padding: 0.5rem 1rem;
-  border: 2px solid #667eea;
-  background: transparent;
-  color: #667eea;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.reset-button:hover, .recalibrate-button:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-1px);
-}
-
-.calibration-summary {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-}
-
-.calibration-summary h3 {
-  color: #333;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.cal-info {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.cal-info span {
-  color: #666;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
 
 .test-area {
   text-align: center;
@@ -110,15 +58,19 @@
 }
 
 .letter-display {
-  background: #000;
-  color: white;
-  padding: 3rem;
-  border-radius: 12px;
-  margin: 2rem 0;
-  min-height: 200px;
+  background: white;
+  color: black;
+  padding: 2rem;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
 .letters {
@@ -131,6 +83,8 @@
   -moz-osx-font-smoothing: grayscale;
   /* Optimized for clinical vision testing */
   text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .navigation-controls {
@@ -147,6 +101,33 @@
   font-size: 0.9rem;
   margin-top: 1rem;
   font-style: italic;
+}
+
+.acuity-denominator {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 6rem;
+  font-weight: normal;
+  color: #e8e8e8;
+  z-index: 50;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Optician Sans', 'Arial Black', 'Arial', 'Helvetica', sans-serif;
+}
+
+.acuity-info-corner {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
+  line-height: 1.3;
+  font-family: 'Optician Sans', 'Arial', 'Helvetica', sans-serif;
+  pointer-events: none;
+  user-select: none;
+  z-index: 60;
 }
 
 

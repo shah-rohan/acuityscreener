@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './TestingScreen.css';
 
 const TestingScreen = ({ calibrationData, onReset }) => {
   const [currentLine, setCurrentLine] = useState(0);
 
-  // Standard visual acuity sizes with unique letter sets for each level
+  // Extended visual acuity sizes with unique letter sets for each level
   const acuitySizes = [
-    { label: '20/200', arcminutes: 50, letters: 'E F P' },
-    { label: '20/100', arcminutes: 25, letters: 'T O Z' },
-    { label: '20/70', arcminutes: 17.5, letters: 'L P E D' },
-    { label: '20/50', arcminutes: 12.5, letters: 'F C Z H R' },
-    { label: '20/40', arcminutes: 10, letters: 'D N P O T H' },
-    { label: '20/30', arcminutes: 7.5, letters: 'F E Z P C L D' },
-    { label: '20/25', arcminutes: 6.25, letters: 'P O L E D F C Z' },
-    { label: '20/20', arcminutes: 5, letters: 'E D F P O T E C L' },
+    { label: '20/400', arcminutes: 100, letters: 'E' },
+    { label: '20/300', arcminutes: 75, letters: 'F P' },
+    { label: '20/250', arcminutes: 62.5, letters: 'E T L' },
+    { label: '20/200', arcminutes: 50, letters: 'F P O Z' },
+    { label: '20/150', arcminutes: 37.5, letters: 'E D T C L' },
+    { label: '20/100', arcminutes: 25, letters: 'F P O Z E D' },
+    { label: '20/80', arcminutes: 20, letters: 'D F P O T E C' },
+    { label: '20/60', arcminutes: 15, letters: 'F E L O P Z D T' },
+    { label: '20/50', arcminutes: 12.5, letters: 'D F P O T E C Z L' },
+    { label: '20/40', arcminutes: 10, letters: 'E D F P O T C Z L H' },
+    { label: '20/30', arcminutes: 7.5, letters: 'F E Z P C L D O T H R' },
+    { label: '20/25', arcminutes: 6.25, letters: 'P O L E D F C Z T H R N' },
+    { label: '20/20', arcminutes: 5, letters: 'E D F P O T C Z L H R N K' },
+    { label: '20/15', arcminutes: 3.75, letters: 'F P O C Z L D T H R N K V Y' },
   ];
 
   // Calculate letter height in pixels based on calibration data and arcminutes
@@ -32,21 +38,18 @@ const TestingScreen = ({ calibrationData, onReset }) => {
     return Math.round(heightPixels);
   };
 
-  const moveToNextLine = () => {
+  const moveToNextLine = useCallback(() => {
     if (currentLine < acuitySizes.length - 1) {
       setCurrentLine(currentLine + 1);
     }
-  };
+  }, [currentLine, acuitySizes.length]);
 
-  const moveToPrevLine = () => {
+  const moveToPrevLine = useCallback(() => {
     if (currentLine > 0) {
       setCurrentLine(currentLine - 1);
     }
-  };
+  }, [currentLine]);
 
-  const resetTest = () => {
-    setCurrentLine(0);
-  };
 
   // Keyboard navigation
   useEffect(() => {
@@ -62,76 +65,47 @@ const TestingScreen = ({ calibrationData, onReset }) => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentLine]);
+  }, [moveToNextLine, moveToPrevLine]);
 
   const currentAcuity = acuitySizes[currentLine];
   const letterHeight = calculateLetterHeight(currentAcuity.arcminutes);
 
+  // Expose functions for sidebar arrows
+  useEffect(() => {
+    const testingScreen = document.querySelector('.testing-screen');
+    if (testingScreen) {
+      testingScreen.moveUp = moveToPrevLine;
+      testingScreen.moveDown = moveToNextLine;
+    }
+    return () => {
+      if (testingScreen) {
+        delete testingScreen.moveUp;
+        delete testingScreen.moveDown;
+      }
+    };
+  }, [moveToNextLine, moveToPrevLine]);
+
   return (
     <div className="testing-screen">
-      <div className="testing-header">
-        <h2>Visual Acuity Test</h2>
-        <div className="test-controls">
-          <button onClick={resetTest} className="reset-button">
-            Reset Test
-          </button>
-          <button onClick={onReset} className="recalibrate-button">
-            Recalibrate
-          </button>
+      <div className="acuity-info-corner">
+        <div>{currentAcuity.label}</div>
+        <div>{((letterHeight / calibrationData?.pixelsPerInch) * 25.4).toFixed(1)}mm</div>
+      </div>
+
+      <div className="letter-display">
+        <div 
+          className="letters"
+          style={{ 
+            fontSize: `${letterHeight}px`,
+            lineHeight: `${letterHeight}px`
+          }}
+        >
+          {currentAcuity.letters}
         </div>
       </div>
 
-      <div className="calibration-summary">
-        <h3>Current Calibration</h3>
-        <div className="cal-info">
-          <span>Distance: {(calibrationData?.viewingDistance / 12).toFixed(1)} feet ({calibrationData?.viewingDistance}" total)</span>
-          <span>Resolution: {calibrationData?.screenWidth}×{calibrationData?.screenHeight}</span>
-          <span>Pixels/inch: {calibrationData?.pixelsPerInch.toFixed(2)}</span>
-        </div>
-      </div>
-
-      <div className="test-area">
-        <div className="current-line-info">
-          <h3>Line {currentLine + 1} of {acuitySizes.length}</h3>
-          <div className="acuity-info">
-            <span className="acuity-label">{currentAcuity.label}</span>
-            <span className="letter-size">Letter height: {letterHeight}px ({((letterHeight / calibrationData?.pixelsPerInch) * 25.4).toFixed(1)}mm)</span>
-          </div>
-        </div>
-
-        <div className="letter-display">
-          <div 
-            className="letters"
-            style={{ 
-              fontSize: `${letterHeight}px`,
-              lineHeight: `${letterHeight}px`
-            }}
-          >
-            {currentAcuity.letters}
-          </div>
-        </div>
-
-        <div className="navigation-controls">
-          <button 
-            onClick={moveToPrevLine}
-            className="nav-button prev-button"
-            disabled={currentLine === 0}
-          >
-            ↑ Larger Letters
-          </button>
-          
-          <button 
-            onClick={moveToNextLine}
-            className="nav-button next-button"
-            disabled={currentLine === acuitySizes.length - 1}
-          >
-            ↓ Smaller Letters
-          </button>
-        </div>
-        
-        <div className="keyboard-hint">
-          Use arrow keys or click buttons to navigate
-        </div>
+      <div className="acuity-denominator">
+        {currentAcuity.label.split('/')[1]}
       </div>
 
     </div>

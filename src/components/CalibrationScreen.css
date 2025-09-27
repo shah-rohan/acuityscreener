@@ -1,9 +1,7 @@
 .calibration-screen {
   background: white;
-  border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -27,32 +25,29 @@
   gap: 2rem;
 }
 
-.screen-info {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border-left: 4px solid #667eea;
-}
-
-.screen-info h3 {
-  color: #333;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.info-grid {
+.calibration-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
-.info-grid div {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  font-weight: 500;
-  color: #555;
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
+
+.viewing-setup {
+  padding-top: 2rem;
+}
+
 
 .input-section h3 {
   color: #333;
@@ -99,14 +94,16 @@
   border-left: 4px solid #28a745;
 }
 
-.calculated-info h3 {
+.calculated-info h4 {
   color: #155724;
   margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .calculated-info div {
   color: #155724;
   font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .calibrate-button {
@@ -119,8 +116,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-self: center;
-  min-width: 200px;
+  margin-top: 1rem;
+  width: 100%;
 }
 
 .calibrate-button:hover:not(:disabled) {
@@ -135,40 +132,14 @@
   box-shadow: none;
 }
 
-.credit-card-section {
-  background: #f0f8ff;
-  padding: 2rem;
-  border-radius: 12px;
-  border-left: 4px solid #4169e1;
-}
-
-.credit-card-section h3 {
-  color: #333;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.calibration-instructions {
-  color: #555;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  text-align: center;
-}
-
-.calibration-instructions strong {
-  color: #4169e1;
-  font-weight: 600;
-}
 
 .credit-card-display {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  min-height: 200px;
+  padding: 1rem;
+  margin: 0;
+  min-height: auto;
 }
 
 .credit-card-rectangle {
@@ -252,6 +223,11 @@
 }
 
 @media (max-width: 768px) {
+  .calibration-columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
   .calibration-controls {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -260,5 +236,9 @@
   .credit-card-display {
     padding: 1rem;
     min-height: 150px;
+  }
+  
+  .viewing-setup {
+    padding-top: 0;
   }
 }

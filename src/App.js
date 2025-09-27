@@ -19,24 +19,50 @@ function App() {
 
   return (
     <div className="App">
-      <header className="app-header">
-        <h1>Visual Acuity Screener</h1>
-        <nav className="navigation">
+      <aside className="sidebar">
+        <nav className="sidebar-nav">
           <button 
-            className={currentScreen === 'calibration' ? 'active' : ''}
+            className={`icon-button ${currentScreen === 'calibration' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('calibration')}
+            title="Calibration"
           >
-            Calibration
+            ⚙️
           </button>
           <button 
-            className={currentScreen === 'testing' ? 'active' : ''}
+            className={`icon-button ${currentScreen === 'testing' ? 'active' : ''}`}
             onClick={() => setCurrentScreen('testing')}
             disabled={!calibrationData}
+            title="Testing"
           >
-            Testing
+            👁️
           </button>
         </nav>
-      </header>
+        
+        {currentScreen === 'testing' && (
+          <div className="testing-arrows">
+            <button 
+              className="arrow-button"
+              onClick={() => {
+                const testingScreen = document.querySelector('.testing-screen');
+                if (testingScreen?.moveUp) testingScreen.moveUp();
+              }}
+              title="Larger Letters"
+            >
+              ↑
+            </button>
+            <button 
+              className="arrow-button"
+              onClick={() => {
+                const testingScreen = document.querySelector('.testing-screen');
+                if (testingScreen?.moveDown) testingScreen.moveDown();
+              }}
+              title="Smaller Letters"
+            >
+              ↓
+            </button>
+          </div>
+        )}
+      </aside>
 
       <main className="main-content">
         {currentScreen === 'calibration' && (
