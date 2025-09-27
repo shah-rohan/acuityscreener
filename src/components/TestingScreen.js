@@ -6,20 +6,20 @@ const TestingScreen = ({ calibrationData, onReset }) => {
 
   // Extended visual acuity sizes with unique letter sets for each level
   const acuitySizes = [
-    { label: '20/400', arcminutes: 100, letters: 'E' },
-    { label: '20/300', arcminutes: 75, letters: 'F P' },
-    { label: '20/250', arcminutes: 62.5, letters: 'E T L' },
-    { label: '20/200', arcminutes: 50, letters: 'F P O Z' },
-    { label: '20/150', arcminutes: 37.5, letters: 'E D T C L' },
-    { label: '20/100', arcminutes: 25, letters: 'F P O Z E D' },
-    { label: '20/80', arcminutes: 20, letters: 'D F P O T E C' },
-    { label: '20/60', arcminutes: 15, letters: 'F E L O P Z D T' },
-    { label: '20/50', arcminutes: 12.5, letters: 'D F P O T E C Z L' },
-    { label: '20/40', arcminutes: 10, letters: 'E D F P O T C Z L H' },
-    { label: '20/30', arcminutes: 7.5, letters: 'F E Z P C L D O T H R' },
-    { label: '20/25', arcminutes: 6.25, letters: 'P O L E D F C Z T H R N' },
-    { label: '20/20', arcminutes: 5, letters: 'E D F P O T C Z L H R N K' },
-    { label: '20/15', arcminutes: 3.75, letters: 'F P O C Z L D T H R N K V Y' },
+    { label: '20/600', arcminutes: 150, letters: 'V' },
+    { label: '20/400', arcminutes: 100, letters: 'B' },
+    { label: '20/300', arcminutes: 75, letters: 'C' },
+    { label: '20/250', arcminutes: 62.5, letters: 'P' },
+    { label: '20/200', arcminutes: 50, letters: 'E' },
+    { label: '20/150', arcminutes: 37.5, letters: 'H B' },
+    { label: '20/100', arcminutes: 25, letters: 'P H T' },
+    { label: '20/80', arcminutes: 20, letters: 'V L N E' },
+    { label: '20/60', arcminutes: 15, letters: 'D A O F' },
+    { label: '20/50', arcminutes: 12.5, letters: 'E G N D H' },
+    { label: '20/40', arcminutes: 10, letters: 'F Z B D E' },
+    { label: '20/30', arcminutes: 7.5, letters: 'O F L C T' },
+    { label: '20/25', arcminutes: 6.25, letters: 'A P E O T F' },
+    { label: '20/20', arcminutes: 5, letters: 'T Z V E C L' },
   ];
 
   // Calculate letter height in pixels based on calibration data and arcminutes
