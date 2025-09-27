@@ -1,0 +1,16 @@
+Optician Sans Font Information
+===============================
+
+To complete the setup, please download the Optician Sans font:
+
+1. Visit: https://optician-sans.com/
+2. Download the font package
+3. Extract and place these files in this folder:
+   - Optician-Sans.otf
+   - Optician-Sans.woff2 (optional, for better performance)
+   - Optician-Sans.woff (optional, for better performance)
+
+Note: Optician Sans only comes in one weight (no bold variant).
+
+The CSS is already configured to use this font for the letter display.
+Fallback fonts (Arial Black, Arial) will be used until the actual font is added.

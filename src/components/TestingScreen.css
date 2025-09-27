@@ -122,11 +122,15 @@
 }
 
 .letters {
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  letter-spacing: 0.1em;
+  font-family: 'Optician Sans', 'Arial Black', 'Arial', 'Helvetica', sans-serif;
+  font-weight: normal;
+  letter-spacing: 0.15em;
   text-align: center;
   line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Optimized for clinical vision testing */
+  text-rendering: optimizeLegibility;
 }
 
 .navigation-controls {

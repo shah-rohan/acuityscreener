@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+
+@font-face {
+  font-family: 'Optician Sans';
+  src: url('./fonts/Optician-Sans.woff2') format('woff2'),
+       url('./fonts/Optician-Sans.woff') format('woff'),
+       url('./fonts/Optician-Sans.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .App {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
