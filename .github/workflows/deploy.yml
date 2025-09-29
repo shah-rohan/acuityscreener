@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main # Or your primary branch
+      - master # Or your primary branch
 
 jobs:
   build-and-deploy:
