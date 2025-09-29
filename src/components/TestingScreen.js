@@ -91,6 +91,7 @@ const TestingScreen = ({ calibrationData, onReset }) => {
       <div className="acuity-info-corner">
         <div>{currentAcuity.label}</div>
         <div>{((letterHeight / calibrationData?.pixelsPerInch) * 25.4).toFixed(1)}mm</div>
+        <div>{letterHeight}px</div>
       </div>
 
       <div className="letter-display">
