@@ -68,7 +68,8 @@ const TestingScreen = ({ calibrationData, onReset }) => {
   }, [moveToNextLine, moveToPrevLine]);
 
   const currentAcuity = acuitySizes[currentLine];
-  const letterHeight = calculateLetterHeight(currentAcuity.arcminutes);
+  const capHeight = 0.52;
+  const letterHeight = calculateLetterHeight(currentAcuity.arcminutes) / capHeight;
 
   // Expose functions for sidebar arrows
   useEffect(() => {
