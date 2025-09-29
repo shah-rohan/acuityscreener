@@ -39,6 +39,21 @@ function App() {
         </nav>
         
         {currentScreen === 'testing' && (
+          <div className="sidebar-middle">
+            <button 
+              className="icon-button"
+              onClick={() => {
+                const testingScreen = document.querySelector('.testing-screen');
+                if (testingScreen?.cycleLetterSet) testingScreen.cycleLetterSet();
+              }}
+              title="Cycle Letter Sets"
+            >
+              🔄
+            </button>
+          </div>
+        )}
+        
+        {currentScreen === 'testing' && (
           <div className="testing-arrows">
             <button 
               className="arrow-button"
