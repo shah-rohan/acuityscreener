@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+## Acuity Screener (Web)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Accurate distance visual acuity testing in any hospital room using only a computer display. Calibrate once with a credit card, set the patient distance, and present optotype lines sized to standard Snellen equivalents (e.g., 20/40, 20/20) using a geometric calculation based on viewing distance and pixels-per-inch.
 
-## Available Scripts
+### Table of Contents
+- Overview
+- Features
+- Quick Start
+- Calibration Guide
+- Testing Workflow
+- Keyboard and UI Controls
+- Deployment (GitHub Pages)
+- Project Structure
+- Tech Stack
+- Development Notes
+- Troubleshooting
 
-In the project directory, you can run:
+### Overview
+This React app enables care teams to roll a workstation into a room and obtain an accurate distance acuity, without needing a chart at a fixed distance. The app computes letter heights from:
+- Measured pixels-per-inch (via on-screen credit card matching)
+- Entered viewing distance (feet)
+- Standard optotype geometry (arcminutes)
 
-### `npm start`
+The result is consistent letter sizing at arbitrary distances.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Features
+- Calibration with on-screen credit card matching to determine pixels-per-inch
+- Adjustable viewing distance with inches and feet readouts
+- Snellen-equivalent lines from 20/600 to 20/20
+- Large, distraction-free testing UI with keyboard support
+- Simple two-step flow: Calibration → Testing
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Quick Start
+Prerequisites: Node.js 18+ and npm
 
-### `npm test`
+```
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open `http://localhost:3000`.
 
-### `npm run build`
+### Calibration Guide
+1. From the Calibration screen, adjust the slider until the on‑screen rectangle exactly matches a physical credit card’s width.
+2. Enter the patient viewing distance in feet.
+3. Click “Complete Calibration”. The app computes and stores:
+   - `pixelsPerInch = onScreenCreditCardPixelWidth / 3.375in`
+   - `viewingDistance` in inches
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Notes
+- Use an actual credit/debit/ID card with standard width (3.375 in).
+- Ensure browser zoom is 100% and OS scaling is what you intend to use during testing.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Testing Workflow
+After calibration, the Testing screen displays optotypes sized via:
+- Convert arcminutes to radians
+- Compute physical letter height: `heightInches = tan(arcminutes / 60 * π/180) * viewingDistance`
+- Convert to pixels: `heightPixels = heightInches * pixelsPerInch`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The UI shows:
+- Current Snellen line (e.g., 20/40)
+- Approximate cap height in px and mm
+- The optotype letters sized to the computed pixel height
 
-### `npm run eject`
+### Keyboard and UI Controls
+- Arrow Up / Left: Larger letters (previous line)
+- Arrow Down / Right: Smaller letters (next line)
+- Sidebar buttons: switch between Calibration and Testing; up/down arrows appear during Testing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Deployment (GitHub Pages)
+The project includes a deployment script using `gh-pages`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Build the app:
+   ```
+   npm run build
+   ```
+2. Deploy:
+   ```
+   npm run deploy
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Ensure your repository is configured for GitHub Pages (Settings → Pages). If deploying from a custom domain or subpath, also set `homepage` in `package.json` accordingly.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Project Structure
+```
+src/
+  App.js                 # App shell and screen routing
+  components/
+    CalibrationScreen.js # Credit card matching, distance input, PPI computation
+    TestingScreen.js     # Optotype rendering, navigation, computed sizes
+public/
+  index.html             # App template and metadata
+```
 
-## Learn More
+### Tech Stack
+- React 19 (Create React App tooling)
+- Plain CSS for styling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Development Notes
+- Fonts: Optician Sans is included in `public/fonts` and `src/fonts`. Update font loading as needed for your deployment.
+- Calculations: `TestingScreen` uses cap height and arcminute geometry for sizing. If changing font, verify the cap-height ratio (`capHeight`) remains appropriate.
+- Linting/Testing: CRA defaults are available via `npm test`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Troubleshooting
+- Letters look too small/large: Re-run calibration. Verify browser zoom at 100% and OS display scaling. Ensure the on-screen card width matches a real card precisely.
+- Keyboard not working: The window must be focused; arrow keys are captured for navigation.
+- Deployment path issues: If hosting under a subpath, set `homepage` in `package.json` and redeploy.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Maintainers: Please update this README whenever calibration logic, controls, or deployment steps change.

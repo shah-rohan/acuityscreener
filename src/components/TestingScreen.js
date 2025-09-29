@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './TestingScreen.css';
 
 const TestingScreen = ({ calibrationData, onReset }) => {
-  const [currentLine, setCurrentLine] = useState(0);
+  const [currentLine, setCurrentLine] = useState(4);
 
   // Extended visual acuity sizes with unique letter sets for each level
   const acuitySizes = [
