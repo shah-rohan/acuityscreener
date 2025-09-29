@@ -110,6 +110,7 @@ const CalibrationScreen = ({ onCalibrationComplete }) => {
                 <h4>Calculated Values</h4>
                 <div>Pixels per inch: {(creditCardPixelWidth / CREDIT_CARD_WIDTH_INCHES).toFixed(2)}</div>
                 <div>Distance: {viewingDistance} feet ({(viewingDistance * 12).toFixed(1)} inches)</div>
+                <div>Window pixel density: {window.devicePixelRatio}</div>
               </div>
             )}
 
