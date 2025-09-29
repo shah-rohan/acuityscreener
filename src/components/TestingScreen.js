@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './TestingScreen.css';
 
 const TestingScreen = ({ calibrationData, onReset }) => {
   const [currentLine, setCurrentLine] = useState(4);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+  const lettersRef = useRef(null);
 
   // Extended visual acuity sizes with unique letter sets for each level
   const acuitySizes = [
@@ -51,6 +52,27 @@ const TestingScreen = ({ calibrationData, onReset }) => {
     }
   }, [currentLine]);
 
+  // Mobile: tap left/right of letters to change lines (horizontal only)
+  const handleLetterDisplayTouch = useCallback((event) => {
+    if (!isMobile) return; // Only handle touch as horizontal on mobile
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    const lettersElement = lettersRef.current;
+    if (!lettersElement) return;
+    const lettersRect = lettersElement.getBoundingClientRect();
+    const eventX = touch.clientX;
+    const lettersCenterX = (lettersRect.left + lettersRect.right) / 2;
+
+    // Prevent synthetic click and 300ms delay
+    event.preventDefault();
+
+    if (eventX < lettersCenterX) {
+      moveToPrevLine();
+    } else {
+      moveToNextLine();
+    }
+  }, [isMobile, moveToPrevLine, moveToNextLine]);
+
 
   // Keyboard navigation
   useEffect(() => {
@@ -83,7 +105,7 @@ const TestingScreen = ({ calibrationData, onReset }) => {
   const letterHeight = emsSquareHeight / capHeight;
   const currentDenominator = parseInt(currentAcuity.label.split('/')[1], 10);
   const reduceSpacingForMobile = isMobile && currentDenominator > 40;
-  const letterSpacing = reduceSpacingForMobile ? '0.05em' : '0.15em';
+  const letterSpacing = reduceSpacingForMobile ? '0.01em' : '0.15em';
 
   // Expose functions for sidebar arrows
   useEffect(() => {
@@ -108,9 +130,10 @@ const TestingScreen = ({ calibrationData, onReset }) => {
         <div>{letterHeight.toFixed(1)}px</div>
       </div>
 
-      <div className="letter-display">
+      <div className="letter-display" onTouchStart={handleLetterDisplayTouch}>
         <div 
           className="letters"
+          ref={lettersRef}
           style={{ 
             fontSize: `${letterHeight}px`,
             lineHeight: `${letterHeight}px`,
