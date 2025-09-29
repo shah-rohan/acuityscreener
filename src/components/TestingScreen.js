@@ -3,6 +3,7 @@ import './TestingScreen.css';
 
 const TestingScreen = ({ calibrationData, onReset }) => {
   const [currentLine, setCurrentLine] = useState(4);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
   // Extended visual acuity sizes with unique letter sets for each level
   const acuitySizes = [
@@ -67,10 +68,22 @@ const TestingScreen = ({ calibrationData, onReset }) => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [moveToNextLine, moveToPrevLine]);
 
+  // Track viewport to detect mobile (including landscape)
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const currentAcuity = acuitySizes[currentLine];
   const capHeight = 0.52;
   const emsSquareHeight = calculateLetterHeight(currentAcuity.arcminutes);
   const letterHeight = emsSquareHeight / capHeight;
+  const currentDenominator = parseInt(currentAcuity.label.split('/')[1], 10);
+  const reduceSpacingForMobile = isMobile && currentDenominator > 40;
+  const letterSpacing = reduceSpacingForMobile ? '0.05em' : '0.15em';
 
   // Expose functions for sidebar arrows
   useEffect(() => {
@@ -100,7 +113,8 @@ const TestingScreen = ({ calibrationData, onReset }) => {
           className="letters"
           style={{ 
             fontSize: `${letterHeight}px`,
-            lineHeight: `${letterHeight}px`
+            lineHeight: `${letterHeight}px`,
+            letterSpacing
           }}
         >
           {currentAcuity.letters}
