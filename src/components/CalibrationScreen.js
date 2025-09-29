@@ -16,7 +16,15 @@ const CalibrationScreen = ({ onCalibrationComplete }) => {
     // Get screen dimensions
     setScreenWidth(window.screen.width);
     setScreenHeight(window.screen.height);
-    setPixelDensity(window.devicePixelRatio || 1);
+    const dpr = window.devicePixelRatio || 1;
+    setPixelDensity(dpr);
+    if (dpr === 1) {
+      setCreditCardPixelWidth(315);
+    } else if (dpr === 2) {
+      setCreditCardPixelWidth(415);
+    } else if (dpr === 3) {
+      setCreditCardPixelWidth(515);
+    }
   }, []);
 
   const handleCalibrate = () => {
@@ -110,7 +118,6 @@ const CalibrationScreen = ({ onCalibrationComplete }) => {
                 <h4>Calculated Values</h4>
                 <div>Pixels per inch: {(creditCardPixelWidth / CREDIT_CARD_WIDTH_INCHES).toFixed(2)}</div>
                 <div>Distance: {viewingDistance} feet ({(viewingDistance * 12).toFixed(1)} inches)</div>
-                <div>Window pixel density: {window.devicePixelRatio}</div>
               </div>
             )}
 

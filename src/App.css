@@ -4,13 +4,13 @@
   box-sizing: border-box;
 }
 
-/* Hide scrollbars */
+/* Hide scrollbars but allow scrolling */
 html {
-  overflow: hidden;
+  overflow: auto;
 }
 
 body {
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* Hide scrollbar for webkit browsers */
