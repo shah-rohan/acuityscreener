@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/acuityscreener/static/css/main.12216768.css",
-    "main.js": "/acuityscreener/static/js/main.008bdf2b.js",
+    "main.css": "/acuityscreener/static/css/main.c1884591.css",
+    "main.js": "/acuityscreener/static/js/main.99e87198.js",
     "static/media/Optician-Sans.woff": "/acuityscreener/static/media/Optician-Sans.d10b06dd236f6ee3576a.woff",
     "static/media/Optician-Sans.woff2": "/acuityscreener/static/media/Optician-Sans.888f484e36b56213213d.woff2",
     "static/media/Optician-Sans.otf": "/acuityscreener/static/media/Optician-Sans.6bccdece30ad0297fde2.otf",
     "index.html": "/acuityscreener/index.html",
-    "main.12216768.css.map": "/acuityscreener/static/css/main.12216768.css.map",
-    "main.008bdf2b.js.map": "/acuityscreener/static/js/main.008bdf2b.js.map"
+    "main.c1884591.css.map": "/acuityscreener/static/css/main.c1884591.css.map",
+    "main.99e87198.js.map": "/acuityscreener/static/js/main.99e87198.js.map"
   },
   "entrypoints": [
-    "static/css/main.12216768.css",
-    "static/js/main.008bdf2b.js"
+    "static/css/main.c1884591.css",
+    "static/js/main.99e87198.js"
   ]
 }
