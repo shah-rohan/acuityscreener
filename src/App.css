@@ -65,8 +65,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
-  margin-bottom: auto;
+}
+
+.sidebar-spacer {
+  flex: 1 1 0;
 }
 
 .icon-button {

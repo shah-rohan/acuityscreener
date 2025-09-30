@@ -37,7 +37,8 @@ function App() {
             👁️
           </button>
         </nav>
-        
+        <div className="sidebar-spacer" />
+
         {currentScreen === 'testing' && (
           <div className="sidebar-middle">
             <button 
@@ -52,7 +53,9 @@ function App() {
             </button>
           </div>
         )}
-        
+
+        <div className="sidebar-spacer" />
+
         {currentScreen === 'testing' && (
           <div className="testing-arrows">
             <button 
