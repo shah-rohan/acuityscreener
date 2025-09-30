@@ -48,7 +48,7 @@ html {
   width: 60px;
   background: white;
   padding: 1rem 0.5rem;
-  min-height: 100vh;
+  height: 100vh;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -62,10 +62,14 @@ html {
 }
 
 .sidebar-middle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
 }
 
 .icon-button {
