@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/acuityscreener/static/css/main.b90c3978.css",
+    "main.css": "/acuityscreener/static/css/main.2f509993.css",
     "main.js": "/acuityscreener/static/js/main.008bdf2b.js",
     "static/media/Optician-Sans.woff": "/acuityscreener/static/media/Optician-Sans.d10b06dd236f6ee3576a.woff",
     "static/media/Optician-Sans.woff2": "/acuityscreener/static/media/Optician-Sans.888f484e36b56213213d.woff2",
     "static/media/Optician-Sans.otf": "/acuityscreener/static/media/Optician-Sans.6bccdece30ad0297fde2.otf",
     "index.html": "/acuityscreener/index.html",
-    "main.b90c3978.css.map": "/acuityscreener/static/css/main.b90c3978.css.map",
+    "main.2f509993.css.map": "/acuityscreener/static/css/main.2f509993.css.map",
     "main.008bdf2b.js.map": "/acuityscreener/static/js/main.008bdf2b.js.map"
   },
   "entrypoints": [
-    "static/css/main.b90c3978.css",
+    "static/css/main.2f509993.css",
     "static/js/main.008bdf2b.js"
   ]
 }
